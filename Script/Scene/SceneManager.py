@@ -1,6 +1,6 @@
 from Script.Scene.Scene import *
 from Script.Scene.SceneIntro import SceneIntro
-from Script.Scene.SingleTon import SingleTon
+from Script.Core.SingleTon import SingleTon
 
 class SceneManager(SingleTon):
     def SceneChange(self, type):
