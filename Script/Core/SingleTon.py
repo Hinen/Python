@@ -2,8 +2,11 @@ class SingleTon():
     __instance = None
 
     @classmethod
-    def get(cls):
+    def get(cls, *args):
         if cls.__instance is None:
-            cls.__instance = cls()
+            if args:
+                cls.__instance = cls(*args)
+            else:
+                cls.__instance = cls()
 
         return cls.__instance

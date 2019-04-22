@@ -1,6 +1,6 @@
 from tkinter import *
 from datetime import *
-from Script.Scene.SceneManager import SceneManager, SceneType
+from Script.Scene.SceneManager import *
 
 class GameManager():
     _win = None
@@ -13,11 +13,21 @@ class GameManager():
         self._win = win
         self._win.title("변환기의 모험")
         self._win.resizable(0, 0)
+
+        # canvas setting
         self._canvas = Canvas(self._win, width=800, height=600)
         self._canvas.pack()
 
-        self._nowScene = SceneManager.get().SceneChange(SceneType.INTRO, self._canvas)
+        # scene init
+        self._nowScene = SceneManager.get(self._canvas).sceneChange(SceneType.INTRO)
+
+        # event bind
+        self._win.bind('<Key>', self.pressKeyHandler)
+
         self.gameLoop()
+
+    def pressKeyHandler(self, key):
+        self._nowScene.pressKeyHandler(key)
 
     def gameLoop(self):
         # calc dt
