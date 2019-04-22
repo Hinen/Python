@@ -2,6 +2,7 @@ from tkinter import *
 
 class GameManager():
     win = None
+    _nowScene = None
 
     def __init__(self, win):
         self.win = win
@@ -11,6 +12,8 @@ class GameManager():
         self.gameLoop()
 
     def gameLoop(self):
+
+
         self.win.after(100, self.gameLoop)   # 0.1초마다 loop
 
 _win = Tk()
