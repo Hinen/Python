@@ -3,10 +3,15 @@ from Script.Scene.SceneIntro import SceneIntro
 from Script.Core.SingleTon import SingleTon
 
 class SceneManager(SingleTon):
-    def SceneChange(self, type):
+    canvas = None
+
+    def SceneChange(self, type, *canvas):
+        if canvas:
+            self.canvas = canvas[0]
+
         targetScene = None
         if type is SceneType.INTRO:
-            targetScene = SceneIntro()
+            targetScene = SceneIntro(self.canvas)
 
         return targetScene
 
