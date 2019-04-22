@@ -1,12 +1,11 @@
 from tkinter import *
 from datetime import *
-from Script.Scene.SceneIntro import *
-
+from Script.Scene.SceneManager import SceneManager, SceneType
 
 class GameManager():
     _win = None
     _dt = 0
-    _nowScene = SceneIntro()
+    _nowScene = SceneManager.get().SceneChange(SceneType.INTRO)
 
     def __init__(self, win):
         self._win = win
