@@ -1,9 +1,9 @@
 class SingleTon():
-    __instancde = None
+    __instance = None
 
     @classmethod
     def get(cls):
-        if cls.__instancde is None:
-            cls.__instancde = cls()
+        if cls.__instance is None:
+            cls.__instance = cls()
 
-        return cls.__instancde
+        return cls.__instance
