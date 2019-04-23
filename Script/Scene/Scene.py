@@ -16,12 +16,14 @@ class Timer():
 class SceneBase():
     type = None
     canvas = None
+    sceneManager = None
 
     timer = {}
 
-    def __init__(self, type, canvas):
+    def __init__(self, type, canvas, sceneManager):
         self.type = type
         self.canvas = canvas
+        self.sceneManager = sceneManager
 
     def update(self, dt):
         self._updateTimer(dt)

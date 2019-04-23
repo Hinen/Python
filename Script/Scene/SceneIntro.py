@@ -1,11 +1,11 @@
-from Script.Scene.SceneManager import *
-from Script.Scene.Scene import *
+from .Scene import *
+from .SceneManager import *
 
 class SceneIntro(SceneBase):
     canPressKey = False
 
-    def __init__(self, canvas):
-        super().__init__(SceneType.INTRO, canvas)
+    def __init__(self, canvas, sceneManager):
+        super().__init__(SceneType.INTRO, canvas, sceneManager)
         self.createText(400, 100, "변환기의 모험", 40)
         self.registerTimer(2, self.createPressAnyKeyText)
 
@@ -15,4 +15,4 @@ class SceneIntro(SceneBase):
 
     def pressKeyHandler(self, key):
         if self.canPressKey:
-            SceneManager.get().sceneChange(SceneType.MENU)
+            self.sceneManager.sceneChange(SceneType.MENU)
