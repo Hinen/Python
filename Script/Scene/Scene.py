@@ -24,6 +24,7 @@ class SceneBase():
         self.type = type
         self.canvas = canvas
         self.sceneManager = sceneManager
+        self.clearScene()
 
     def update(self, dt):
         self._updateTimer(dt)
@@ -62,3 +63,6 @@ class SceneBase():
             textColor = color[0]
 
         return self.canvas.create_text(posX, posY, text=text, font=("문체부 제목 돋음체", size), fill=textColor)
+
+    def clearScene(self):
+        self.canvas.delete("all")
