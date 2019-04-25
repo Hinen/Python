@@ -6,11 +6,13 @@ from Script.Core.SingleTon import SingleTon
 class SceneManager(SingleTon):
     win = None
     canvas = None
+    callback = None
 
     def __init__(self, *args):
         if args:
             self.win = args[0]
             self.canvas = args[1]
+            self.callback = args[2]
 
     def sceneChange(self, type):
         targetScene = None
@@ -19,5 +21,5 @@ class SceneManager(SingleTon):
         elif type is SceneType.MENU:
             targetScene = SceneMenu(self.win, self.canvas, self)
 
-        return targetScene
+        self.callback(targetScene)
 

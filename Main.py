@@ -34,9 +34,12 @@ class GameManager():
         self._win.bind('<Key>', self.pressKeyHandler)
 
         # scene init
-        self._nowScene = SceneManager.get(self._win, self._canvas).sceneChange(SceneType.INTRO)
+        SceneManager.get(self._win, self._canvas, self.sceneChange).sceneChange(SceneType.INTRO)
 
         self.gameLoop()
+
+    def sceneChange(self, newScene):
+        self._nowScene = newScene
 
     def pressKeyHandler(self, key):
         self._nowScene.pressKeyHandler(key)
