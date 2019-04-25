@@ -12,6 +12,7 @@ class SceneMenu(SceneBase):
 
     def gameStart(self):
         SoundManager.get().playFX("select.wav")
+        self.sceneManager.sceneChange(SceneType.GAME)
 
     def gameDesc(self):
         SoundManager.get().playFX("select.wav")
