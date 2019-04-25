@@ -1,5 +1,16 @@
 from tkinter import *
 from datetime import *
+import os
+
+def importPyGame():
+    try:
+        import pygame
+    except ImportError:
+        print("Installing PyGame")
+        os.system('pip install pygame')
+        importPyGame()
+
+importPyGame()
 from Script.Scene.SceneManager import *
 
 class GameManager():
