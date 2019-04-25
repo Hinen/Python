@@ -1,5 +1,8 @@
 import enum
 import pygame
+from tkinter import *
+
+FONT = "문체부 제목 돋음체"
 
 class SceneType(enum.Enum):
     INTRO = 1
@@ -15,13 +18,16 @@ class Timer():
 
 class SceneBase():
     type = None
+
+    win = None
     canvas = None
     sceneManager = None
 
     timer = {}
 
-    def __init__(self, type, canvas, sceneManager):
+    def __init__(self, type, win, canvas, sceneManager):
         self.type = type
+        self.win = win
         self.canvas = canvas
         self.sceneManager = sceneManager
         self.clearScene()
@@ -62,7 +68,12 @@ class SceneBase():
         if color:
             textColor = color[0]
 
-        return self.canvas.create_text(posX, posY, text=text, font=("문체부 제목 돋음체", size), fill=textColor)
+        return self.canvas.create_text(posX, posY, text=text, font=(FONT, size), fill=textColor)
+    
+    def createButton(self, posX, posY, width, height, text, textSize, callback):
+        button = Button(self.win, text=text, font=(FONT, textSize), command=callback, anchor=CENTER)
+        button.configure(width=width, height=height)
+        return self.canvas.create_window(posX, posY, anchor=CENTER, window=button)
 
     def clearScene(self):
         self.canvas.delete("all")

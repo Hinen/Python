@@ -30,11 +30,11 @@ class GameManager():
         self._canvas = Canvas(self._win, width=800, height=600)
         self._canvas.pack()
 
-        # scene init
-        self._nowScene = SceneManager.get(self._canvas).sceneChange(SceneType.INTRO)
-
         # event bind
         self._win.bind('<Key>', self.pressKeyHandler)
+
+        # scene init
+        self._nowScene = SceneManager.get(self._win, self._canvas).sceneChange(SceneType.INTRO)
 
         self.gameLoop()
 
