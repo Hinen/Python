@@ -1,6 +1,6 @@
 import enum
-import pygame
 from tkinter import *
+from Script.Utility.SoundManager import *
 
 FONT = "문체부 제목 돋음체"
 

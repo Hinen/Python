@@ -5,14 +5,14 @@ import os
 def importPyGame():
     try:
         import pygame
-        pygame.mixer.init()
     except ImportError:
         print("Installing PyGame")
         os.system('pip install pygame')
         importPyGame()
 
 importPyGame()
-from Script.Scene.SceneManager import *
+from Script.Utility.SceneManager import *
+from Script.Utility.SoundManager import *
 
 class GameManager():
     _win = None

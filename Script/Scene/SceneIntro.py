@@ -1,5 +1,5 @@
 from .Scene import *
-from .SceneManager import *
+from Script.Utility.SceneManager import *
 
 class SceneIntro(SceneBase):
     canPressKey = False
@@ -8,9 +8,7 @@ class SceneIntro(SceneBase):
         super().__init__(SceneType.INTRO, win, canvas, sceneManager)
         self.createText(400, 100, "뇌가 이상해지는 변환기", 40)
         self.registerTimer(2, self.createPressAnyKeyText)
-
-        pygame.mixer.music.load('Resources/Sound/BGM/taebo.wav')
-        pygame.mixer.music.play(-1)
+        SoundManager.get().playBGM('taebo.wav', -1)
 
     def createPressAnyKeyText(self):
         self.createText(400, 400, "Press Any Key", 25, "red")

@@ -9,10 +9,10 @@ class SceneMenu(SceneBase):
         self.createButton(400, 500, 20, 2, "게임 종료", 20, self.gameQuit)
 
     def gameStart(self):
-        pass
+        SoundManager.get().playFX("select.wav")
 
     def gameDesc(self):
-        pass
+        SoundManager.get().playFX("select.wav")
 
     def gameQuit(self):
-        pass
+        SoundManager.get().playFX("select.wav")
