@@ -9,8 +9,8 @@ class SceneIntro(SceneBase):
         self.createText(400, 100, "변환기의 모험", 40)
         self.registerTimer(2, self.createPressAnyKeyText)
 
-        pygame.mixer.music.load('Resources/Sound/taebo.mp3')
-        pygame.mixer.music.play()
+        pygame.mixer.music.load('Resources/Sound/taebo.wav')
+        pygame.mixer.music.play(-1)
 
     def createPressAnyKeyText(self):
         self.createText(400, 400, "Press Any Key", 15, "red")
