@@ -2,7 +2,7 @@ import enum
 from tkinter import *
 from Script.Utility.SoundManager import *
 
-FONT = "문체부 제목 돋음체"
+FONT = "휴먼엑스포"
 
 class SceneType(enum.Enum):
     INTRO = 1
