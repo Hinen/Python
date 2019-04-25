@@ -7,6 +7,7 @@ FONT = "문체부 제목 돋음체"
 class SceneType(enum.Enum):
     INTRO = 1
     MENU = 2
+    DESC = 3
 
 class Timer():
     time = 0

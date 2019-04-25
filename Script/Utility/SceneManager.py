@@ -1,6 +1,7 @@
 from Script.Scene.Scene import SceneType
 from Script.Scene.SceneIntro import SceneIntro
 from Script.Scene.SceneMenu import SceneMenu
+from Script.Scene.SceneDesc import SceneDesc
 from Script.Core.SingleTon import SingleTon
 
 class SceneManager(SingleTon):
@@ -17,9 +18,11 @@ class SceneManager(SingleTon):
     def sceneChange(self, type):
         targetScene = None
         if type is SceneType.INTRO:
-            targetScene = SceneIntro(self.win, self.canvas, self)
+            targetScene = SceneIntro(type, self.win, self.canvas, self)
         elif type is SceneType.MENU:
-            targetScene = SceneMenu(self.win, self.canvas, self)
+            targetScene = SceneMenu(type, self.win, self.canvas, self)
+        elif type is SceneType.DESC:
+            targetScene = SceneDesc(type, self.win, self.canvas, self)
 
         self.callback(targetScene)
 
