@@ -5,6 +5,7 @@ import os
 def importPyGame():
     try:
         import pygame
+        pygame.mixer.init()
     except ImportError:
         print("Installing PyGame")
         os.system('pip install pygame')

@@ -17,7 +17,6 @@ class SceneBase():
     type = None
     canvas = None
     sceneManager = None
-    pygameSound = None
 
     timer = {}
 
@@ -25,8 +24,6 @@ class SceneBase():
         self.type = type
         self.canvas = canvas
         self.sceneManager = sceneManager
-        self.pygameSound = pygame.init()
-
         self.clearScene()
 
     def update(self, dt):
