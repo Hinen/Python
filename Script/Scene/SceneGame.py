@@ -97,9 +97,8 @@ class SceneGame(SceneBase):
         #self.gameOver()
 
     def bingo(self):
-        SoundManager.get().playFX("bingo.wav")
-
         self._canSelect = False
+        SoundManager.get().playFX("bingo.wav")
 
         # 현재 레벨 만큼 스코어 상승
         self._score += self._level
@@ -116,4 +115,6 @@ class SceneGame(SceneBase):
 
     def gameOver(self):
         self._canSelect = False
+        SoundManager.get().playFX("wrong.wav")
+        
         self.win.quit()
