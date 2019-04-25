@@ -18,4 +18,4 @@ class SceneMenu(SceneBase):
         self.sceneManager.sceneChange(SceneType.DESC)
 
     def gameQuit(self):
-        SoundManager.get().playFX("select.wav")
+        self.win.quit()
