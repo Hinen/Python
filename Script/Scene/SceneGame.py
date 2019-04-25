@@ -65,9 +65,8 @@ class SceneGame(SceneBase):
         self._secondAnswerButton.configure(text="")
 
     def resetQuestion(self):
-        pass
-
-
+        self._value[0] = random.randint(1, 8)
+        self._value[1] = random.randint(1, 9 - self._value[0])
 
     def createQuestionButton(self):
         self._firstAnswerButton = self.createImageButton(200, 300, "circleButton.png", "", 30, self.selectQuestion, 0)
@@ -86,8 +85,17 @@ class SceneGame(SceneBase):
         self.registerTimer(self.GAME_QUESTION_TIME_JOB, 0.25, self.showSecondQuestionMore)
 
     def showSecondQuestionMore(self):
-        self._secondQuestionMoreText.configure(text="는")
+        self.makeRandomSelection()
 
+        self._secondQuestionMoreText.configure(text="는")
+        self._firstAnswerButton.configure(text=self._selection[0])
+        self._secondAnswerButton.configure(text=self._selection[1])
+
+        self._canSelect = True
+        # 두번째 보기가 완전히 나오면 게임 오버 타이머도 등록
+        self.registerTimer(self.GAME_OVER_TIME_JOB, 10, self.gameOver)
+
+    def makeRandomSelection(self):
         sum = self._value[0] + self._value[1]
         while True:
             value = random.randint(1, 9)
@@ -97,19 +105,14 @@ class SceneGame(SceneBase):
         self._selection = [sum, value]
         random.shuffle(self._selection)
 
-        self._firstAnswerButton.configure(text=self._selection[0])
-        self._secondAnswerButton.configure(text=self._selection[1])
-
-        self._canSelect = True
-        # 두번째 보기가 완전히 나오면 게임 오버 타이머도 등록
-        self.registerTimer(self.GAME_OVER_TIME_JOB, 10, self.gameOver)
-
     def selectQuestion(self, selection):
         if not self._canSelect:
             return
 
         answer = self._selection[selection[0]]
         sum = self._value[0] + self._value[1]
+
+        # 정답 체크
         if sum == answer:
             if sum == 9:
                 self.bingo()
@@ -142,4 +145,4 @@ class SceneGame(SceneBase):
         self._canSelect = False
         SoundManager.get().playFX("wrong.wav")
 
-        self.win.quit()
+        #self.win.quit()
