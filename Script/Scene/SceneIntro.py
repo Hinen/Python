@@ -7,7 +7,7 @@ class SceneIntro(SceneBase):
     def __init__(self, type, win, canvas, sceneManager):
         super().__init__(type, win, canvas, sceneManager)
 
-        self.createText(400, 100, "뇌가 이상해지는 변환기", 40)
+        self.createText(400, 100, "뇌를 9로 바꾸는 변환기", 40)
         self.registerTimer(2, self.createPressAnyKeyText)
 
         # play bgm
