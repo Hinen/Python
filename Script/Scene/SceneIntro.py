@@ -6,7 +6,7 @@ class SceneIntro(SceneBase):
 
     def __init__(self, canvas, sceneManager):
         super().__init__(SceneType.INTRO, canvas, sceneManager)
-        self.createText(400, 100, "변환기의 모험", 40)
+        self.createText(400, 100, "뇌가 이상해지는 변환기", 40)
         self.registerTimer(2, self.createPressAnyKeyText)
 
         pygame.mixer.music.load('Resources/Sound/taebo.wav')

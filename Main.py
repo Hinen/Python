@@ -23,7 +23,7 @@ class GameManager():
 
     def __init__(self, win):
         self._win = win
-        self._win.title("변환기의 모험")
+        self._win.title("뇌가 이상해지는 변환기")
         self._win.resizable(0, 0)
 
         # canvas setting
