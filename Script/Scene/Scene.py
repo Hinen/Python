@@ -80,13 +80,17 @@ class SceneBase():
         self.canvas.create_window(posX, posY, anchor=CENTER, window=imgLabel)
         return imgLabel
 
-    def createText(self, posX, posY, text, size, *color):
+    def createText(self, posX, posY, text, size, *args):
         textColor = "black"
-        if color:
-            textColor = color[0]
+        anchor = CENTER
+        if args:
+            if len(args) >= 1:
+                textColor = args[0]
+            if len(args) >= 2:
+                anchor = args[1]
 
-        t = Label(self.win, text=text, font=(FONT, size), fg=textColor, bg="white")
-        self.canvas.create_window(posX, posY, window=t)
+        t = Label(self.win, text=text, font=(FONT, size), fg=textColor, bg="white", anchor=anchor)
+        self.canvas.create_window(posX, posY, window=t, anchor=anchor)
         return t
     
     def createButton(self, posX, posY, width, height, text, textSize, callback, *param):
