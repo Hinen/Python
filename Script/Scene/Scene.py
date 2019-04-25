@@ -1,4 +1,15 @@
 import enum
+import os
+
+def importPyGame():
+    try:
+        import pygame
+    except ImportError:
+        print("Installing PyGame")
+        os.system('pip install pygame')
+        importPyGame()
+
+importPyGame()
 
 class SceneType(enum.Enum):
     INTRO = 1
@@ -11,7 +22,6 @@ class Timer():
     def __init__(self, time, callback):
         self.time = time
         self.callback = callback
-
 
 class SceneBase():
     type = None
