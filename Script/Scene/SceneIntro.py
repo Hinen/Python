@@ -7,8 +7,10 @@ class SceneIntro(SceneBase):
     def __init__(self, type, win, canvas, sceneManager):
         super().__init__(type, win, canvas, sceneManager)
 
+        self.createImage(400, 300, "whiteBG.png")
         self.createText(400, 100, "뇌를 9로 바꾸는 변환기", 40)
-        self.registerTimer(2, self.createPressAnyKeyText)
+
+        self.registerTimer(self.getNotUseTimeJob(), 2, self.createPressAnyKeyText)
 
         # play bgm
         SoundManager.get().playBGM('taebo.wav', -1)

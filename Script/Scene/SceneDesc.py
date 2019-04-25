@@ -4,6 +4,7 @@ class SceneDesc(SceneBase):
     def __init__(self, type, win, canvas, sceneManager):
         super().__init__(type, win, canvas, sceneManager)
 
+        self.createImage(400, 300, "whiteBG.png")
         self.createText(400, 100, "설명", 40)
 
         self.createText(400, 200, "덧셈 문제와 보기 2개가 나오면", 20)

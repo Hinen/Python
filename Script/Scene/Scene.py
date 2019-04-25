@@ -48,10 +48,11 @@ class SceneBase():
                 run.append(t)
 
         for i in run:
-            self.timer[i].callback()
+            callback = self.timer[i].callback
             del self.timer[i]
+            callback()
 
-    def registerTimer(self, time, callback):
+    def getNotUseTimeJob(self):
         # get Time Job
         timeJob = 0
         while True:
@@ -60,22 +61,53 @@ class SceneBase():
 
             timeJob -= 1
 
-        self.timer[timeJob] = Timer(time, callback)
+        return timeJob
+
+    def registerTimer(self, jobID, time, callback):
+        self.timer[jobID] = Timer(time, callback)
+
+    def unRegisterTimer(self, jobID):
+        del self.timer[jobID]
 
     def pressKeyHandler(self, key):
         pass
+
+    def createImage(self, posX, posY, name):
+        img = PhotoImage(file='Resources/Assets/' + name)
+        imgLabel = Label(self.win, image=img)
+        imgLabel.image = img
+
+        self.canvas.create_window(posX, posY, anchor=CENTER, window=imgLabel)
+        return imgLabel
 
     def createText(self, posX, posY, text, size, *color):
         textColor = "black"
         if color:
             textColor = color[0]
 
-        return self.canvas.create_text(posX, posY, text=text, font=(FONT, size), fill=textColor)
+        t = Label(self.win, text=text, font=(FONT, size), fg=textColor, bg="white")
+        self.canvas.create_window(posX, posY, window=t)
+        return t
     
-    def createButton(self, posX, posY, width, height, text, textSize, callback):
-        button = Button(self.win, text=text, font=(FONT, textSize), command=callback, anchor=CENTER)
-        button.configure(width=width, height=height)
-        return self.canvas.create_window(posX, posY, anchor=CENTER, window=button)
+    def createButton(self, posX, posY, width, height, text, textSize, callback, *param):
+        if param:
+            button = Button(self.win, width=width, height=height, text=text, font=(FONT, textSize), command=lambda : callback(param), anchor=CENTER)
+        else:
+            button = Button(self.win, width=width, height=height, text=text, font=(FONT, textSize), command=callback, anchor=CENTER)
+
+        self.canvas.create_window(posX, posY, anchor=CENTER, window=button)
+        return button
+
+    def createImageButton(self, posX, posY, name, text, textSize, callback, *param):
+        img = PhotoImage(file='Resources/Assets/' + name)
+        if param:
+            button = Button(self.win, text=text, font=(FONT, textSize), image=img, compound=CENTER, command=lambda : callback(param), bg="white", borderwidth=0, padx=0, pady=0)
+        else:
+            button = Button(self.win, text=text, font=(FONT, textSize), image=img, compound=CENTER, command=callback, bg="white", borderwidth=0, padx=0, pady=0)
+
+        button.image = img
+        self.canvas.create_window(posX, posY, anchor=CENTER, window=button)
+        return button
 
     def clearScene(self):
         self.canvas.delete("all")
