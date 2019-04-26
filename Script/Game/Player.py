@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from Script.Core.SingleTon import *
 
 class Player(SingleTon):

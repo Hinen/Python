@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from Script.Scene.Scene import SceneType
 from Script.Scene.SceneIntro import SceneIntro
 from Script.Scene.SceneMenu import SceneMenu
