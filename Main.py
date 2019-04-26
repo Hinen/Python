@@ -9,7 +9,11 @@ def importPyGame():
         import pygame
     except ImportError:
         print("Installing PyGame")
-        os.system('pip install pygame')
+        try:
+            import pip._internal
+            pip._internal.main(['install', 'pygame'])
+        except ImportError:
+            print("너어는 답도 없다 진짜 알아서하세요")
         importPyGame()
 
 importPyGame()
