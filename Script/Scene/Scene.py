@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import enum
 from tkinter import *
 from Script.Utility.SoundManager import *

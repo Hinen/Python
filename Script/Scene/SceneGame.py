@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from .Scene import *
 import random
 
