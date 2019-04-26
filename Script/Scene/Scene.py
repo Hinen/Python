@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import enum
-from tkinter import *
+from Script.Game.GameObject import *
 from Script.Utility.SoundManager import *
 
 FONT = "휴먼엑스포"
@@ -80,9 +80,10 @@ class SceneBase():
         imgLabel.image = img
 
         imgLabel.place(x=posX, y=posY, anchor=CENTER)
+        obj = GameObject(imgLabel, posX, posY, CENTER)
         # self.canvas.create_window(posX, posY, anchor=CENTER, window=imgLabel)
 
-        return imgLabel
+        return obj
 
     def createText(self, posX, posY, text, size, *args):
         textColor = "black"
@@ -94,10 +95,10 @@ class SceneBase():
                 anchor = args[1]
 
         t = Label(self.win, text=text, font=(FONT, size), fg=textColor, bg="white", anchor=anchor)
-        t.place(x=posX, y=posY, anchor=anchor)
+        obj = GameObject(t, posX, posY, anchor)
         # self.canvas.create_window(posX, posY, window=t, anchor=anchor)
 
-        return t
+        return obj
     
     def createButton(self, posX, posY, width, height, text, textSize, callback, *param):
         if param:
@@ -105,10 +106,10 @@ class SceneBase():
         else:
             button = Button(self.win, width=width, height=height, text=text, font=(FONT, textSize), command=callback, anchor=CENTER)
 
-        button.place(x=posX, y=posY, anchor=CENTER)
+        obj = GameObject(button, posX, posY, CENTER)
         # self.canvas.create_window(posX, posY, anchor=CENTER, window=button)
 
-        return button
+        return obj
 
     def createImageButton(self, posX, posY, name, text, textSize, callback, *param):
         img = PhotoImage(file='Resources/Assets/' + name)
@@ -118,10 +119,10 @@ class SceneBase():
             button = Button(self.win, text=text, font=(FONT, textSize), image=img, compound=CENTER, command=callback, bg="white", borderwidth=0, padx=0, pady=0)
 
         button.image = img
-        button.place(x=posX, y=posY, anchor=CENTER)
+        obj = GameObject(button, posX, posY, CENTER)
         # self.canvas.create_window(posX, posY, anchor=CENTER, window=button)\
 
-        return button
+        return obj
 
     def clearScene(self):
         self.canvas.delete("all")

@@ -42,11 +42,17 @@ class SceneGame(SceneBase):
     def createTextData(self):
         self._nowQuestionCountText = self.createText(30, 60, "문제 %d번" % self._count, 40, "black", W)
 
-        self._firstQuestionText = self.createText(100, 200, "", 40) # 숫자
-        self._firstQuestionMoreText = self.createText(170, 200, "", 20) # 더하기
+        self._firstQuestionText = self.createText(100, 200, "", 40) # value[0]
+        self._firstQuestionText.setVisible(False)
 
-        self._secondQuestionText = self.createText(260, 200, "", 40) # 숫자
-        self._secondQuestionMoreText = self.createText(305, 200, "", 20) # 는
+        self._firstQuestionMoreText = self.createText(170, 200, "더하기", 20)
+        self._firstQuestionMoreText.setVisible(False)
+
+        self._secondQuestionText = self.createText(260, 200, "", 40) # value[1]
+        self._secondQuestionText.setVisible(False)
+
+        self._secondQuestionMoreText = self.createText(305, 200, "는", 20)
+        self._secondQuestionMoreText.setVisible(False)
 
         self._whatIsYourSelectionText = self.createText(300, 370, "어느 쪽?", 20)
 
@@ -58,13 +64,14 @@ class SceneGame(SceneBase):
         self.showFirstQuestion()
 
     def resetTextData(self):
-        self._nowQuestionCountText.configure(text="문제 %d번" % self._count)
-        self._firstQuestionText.configure(text="")
-        self._firstQuestionMoreText.configure(text="")
-        self._secondQuestionText.configure(text="")
-        self._secondQuestionMoreText.configure(text="")
-        self._firstAnswerButton.configure(text="")
-        self._secondAnswerButton.configure(text="")
+        self._nowQuestionCountText.changeTextConfigure("문제 %d번" % self._count)
+
+        self._firstQuestionText.setVisible(False)
+        self._firstQuestionMoreText.setVisible(False)
+        self._secondQuestionText.setVisible(False)
+        self._secondQuestionMoreText.setVisible(False)
+        self._firstAnswerButton.object.configure(text="")
+        self._secondAnswerButton.object.configure(text="")
 
     def resetQuestion(self):
         self._value[0] = random.randint(1, 8)
@@ -75,23 +82,27 @@ class SceneGame(SceneBase):
         self._secondAnswerButton = self.createImageButton(400, 300, "circleButton.png", "", 30, self.selectQuestion, 1)
 
     def showFirstQuestion(self):
-        self._firstQuestionText.configure(text=self._value[0])
+        self._firstQuestionText.changeTextConfigure(self._value[0])
+        self._firstQuestionText.setVisible(True)
+
         self.registerTimer(self.GAME_QUESTION_TIME_JOB, 0.25, self.showFirstQuestionMore)
 
     def showFirstQuestionMore(self):
-        self._firstQuestionMoreText.configure(text="더하기")
+        self._firstQuestionMoreText.setVisible(True)
         self.registerTimer(self.GAME_QUESTION_TIME_JOB, 0.25, self.showSecondQuestion)
 
     def showSecondQuestion(self):
-        self._secondQuestionText.configure(text=self._value[1])
+        self._secondQuestionText.changeTextConfigure(self._value[1])
+        self._secondQuestionText.setVisible(True)
+
         self.registerTimer(self.GAME_QUESTION_TIME_JOB, 0.25, self.showSecondQuestionMore)
 
     def showSecondQuestionMore(self):
         self.makeRandomSelection()
 
-        self._secondQuestionMoreText.configure(text="는")
-        self._firstAnswerButton.configure(text=self._selection[0])
-        self._secondAnswerButton.configure(text=self._selection[1])
+        self._secondQuestionMoreText.setVisible(True)
+        self._firstAnswerButton.changeTextConfigure(self._selection[0])
+        self._secondAnswerButton.changeTextConfigure(self._selection[1])
 
         self._canSelect = True
         # 두번째 보기가 완전히 나오면 게임 오버 타이머도 등록
@@ -135,7 +146,7 @@ class SceneGame(SceneBase):
         self._count += 1
 
         # text 갱신
-        self._scoreText.configure(text="뇌가 9가 된 정도 : %d" % self._score)
+        self._scoreText.changeTextConfigure("뇌가 9가 된 정도 : %d" % self._score)
 
         # 정답을 맞추면 게임 오버 타이머 제거
         self.unRegisterTimer(self.GAME_OVER_TIME_JOB)
