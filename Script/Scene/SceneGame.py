@@ -70,8 +70,8 @@ class SceneGame(SceneBase):
         self._firstQuestionMoreText.setVisible(False)
         self._secondQuestionText.setVisible(False)
         self._secondQuestionMoreText.setVisible(False)
-        self._firstAnswerButton.object.configure(text="")
-        self._secondAnswerButton.object.configure(text="")
+        self._firstAnswerButton.setTextConfigure("")
+        self._secondAnswerButton.setTextConfigure("")
 
     def resetQuestion(self):
         self._value[0] = random.randint(1, 8)
