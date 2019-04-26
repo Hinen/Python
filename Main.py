@@ -18,7 +18,6 @@ from Script.Utility.SoundManager import *
 
 class GameManager():
     _win = None
-    _canvas = None
 
     _dt = 0
     _nowScene = None
@@ -26,17 +25,14 @@ class GameManager():
     def __init__(self, win):
         self._win = win
         self._win.title("뇌를 9로 바꾸는 변환기")
+        self._win.geometry("800x600")
         self._win.resizable(0, 0)
-
-        # canvas setting
-        self._canvas = Canvas(self._win, width=800, height=600)
-        self._canvas.pack()
 
         # event bind
         self._win.bind('<Key>', self.pressKeyHandler)
 
         # scene init
-        SceneManager.get(self._win, self._canvas, self.sceneChange).sceneChange(SceneType.INTRO)
+        SceneManager.get(self._win, self.sceneChange).sceneChange(SceneType.INTRO)
 
         self.gameLoop()
 

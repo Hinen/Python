@@ -25,16 +25,14 @@ class SceneBase():
     type = None
 
     win = None
-    canvas = None
     sceneManager = None
     objects = []
 
     timer = {}
 
-    def __init__(self, type, win, canvas, sceneManager):
+    def __init__(self, type, win, sceneManager):
         self.type = type
         self.win = win
-        self.canvas = canvas
         self.sceneManager = sceneManager
         self.objects = []
 

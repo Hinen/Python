@@ -6,8 +6,8 @@ from Script.Utility.SceneManager import *
 class SceneIntro(SceneBase):
     canPressKey = False
 
-    def __init__(self, type, win, canvas, sceneManager):
-        super().__init__(type, win, canvas, sceneManager)
+    def __init__(self, type, win, sceneManager):
+        super().__init__(type, win, sceneManager)
 
         self.createImage(400, 300, "whiteBG.png")
         self.createText(400, 100, "뇌를 9로 바꾸는 변환기", 40)

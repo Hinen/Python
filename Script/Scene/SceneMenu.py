@@ -3,8 +3,8 @@
 from .Scene import *
 
 class SceneMenu(SceneBase):
-    def __init__(self, type, win, canvas, sceneManager):
-        super().__init__(type, win, canvas, sceneManager)
+    def __init__(self, type, win, sceneManager):
+        super().__init__(type, win, sceneManager)
 
         self.createImage(400, 300, "whiteBG.png")
         self.createText(400, 100, "메뉴", 40)

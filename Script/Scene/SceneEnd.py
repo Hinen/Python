@@ -5,8 +5,8 @@ from .Scene import *
 class SceneEnd(SceneBase):
     sound = None
 
-    def __init__(self, type, win, canvas, sceneManager):
-        super().__init__(type, win, canvas, sceneManager)
+    def __init__(self, type, win, sceneManager):
+        super().__init__(type, win, sceneManager)
 
         SoundManager.get().stopBGM()
         self.sound = SoundManager.get().playFX('gameEnd.wav')

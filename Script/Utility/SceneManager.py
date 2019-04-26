@@ -8,27 +8,25 @@ from Script.Core.SingleTon import SingleTon
 
 class SceneManager(SingleTon):
     win = None
-    canvas = None
     callback = None
 
     def __init__(self, *args):
         if args:
             self.win = args[0]
-            self.canvas = args[1]
-            self.callback = args[2]
+            self.callback = args[1]
 
     def sceneChange(self, type):
         targetScene = None
         if type is SceneType.INTRO:
-            targetScene = SceneIntro(type, self.win, self.canvas, self)
+            targetScene = SceneIntro(type, self.win, self)
         elif type is SceneType.MENU:
-            targetScene = SceneMenu(type, self.win, self.canvas, self)
+            targetScene = SceneMenu(type, self.win, self)
         elif type is SceneType.DESC:
-            targetScene = SceneDesc(type, self.win, self.canvas, self)
+            targetScene = SceneDesc(type, self.win, self)
         elif type is SceneType.GAME:
-            targetScene = SceneGame(type, self.win, self.canvas, self)
+            targetScene = SceneGame(type, self.win, self)
         elif type is SceneType.END:
-            targetScene = SceneEnd(type, self.win, self.canvas, self)
+            targetScene = SceneEnd(type, self.win, self)
 
         self.callback(targetScene)
 
