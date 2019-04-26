@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import enum
 from Script.Game.GameObject import *
+from Script.Game.Player import *
 from Script.Utility.SoundManager import *
 
 FONT = "휴먼엑스포"
@@ -12,6 +12,7 @@ class SceneType(enum.Enum):
     DESC = 3
     GAME = 4
     END = 5
+    CREATE_PLAYER = 6
 
 class Timer():
     time = 0
@@ -134,4 +135,11 @@ class SceneBase():
         # self.canvas.create_window(posX, posY, anchor=CENTER, window=button)\
 
         self.objects.append(obj)
+        return obj
+
+    def createEntry(self, posX, posY, width, bd, textSize, callback):
+        entry = Entry(self.win, width=width, bd=bd, font=(FONT, textSize))
+        entry.bind("<Return>", callback)
+
+        obj = GameObject(entry, posX, posY, CENTER)
         return obj

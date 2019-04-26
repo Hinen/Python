@@ -4,6 +4,7 @@ from Script.Scene.SceneMenu import SceneMenu
 from Script.Scene.SceneDesc import SceneDesc
 from Script.Scene.SceneGame import SceneGame
 from Script.Scene.SceneEnd import SceneEnd
+from Script.Scene.SceneCreatePlayer import SceneCreatePlayer
 from Script.Core.SingleTon import SingleTon
 
 class SceneManager(SingleTon):
@@ -27,6 +28,8 @@ class SceneManager(SingleTon):
             targetScene = SceneGame(type, self.win, self)
         elif type is SceneType.END:
             targetScene = SceneEnd(type, self.win, self)
+        elif type is SceneType.CREATE_PLAYER:
+            targetScene = SceneCreatePlayer(type, self.win, self)
 
         self.callback(targetScene)
 

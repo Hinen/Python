@@ -23,4 +23,4 @@ class SceneIntro(SceneBase):
 
     def pressKeyHandler(self, key):
         if self.canPressKey:
-            self.sceneManager.sceneChange(SceneType.MENU)
+            self.sceneManager.sceneChange(SceneType.CREATE_PLAYER)
