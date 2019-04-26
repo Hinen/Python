@@ -38,6 +38,6 @@ class GameObject():
         else:
             self.object.place_forget()
 
-    def changeTextConfigure(self, text):
+    def setTextConfigure(self, text):
         self.object.configure(text=text)
 

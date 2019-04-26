@@ -64,7 +64,7 @@ class SceneGame(SceneBase):
         self.showFirstQuestion()
 
     def resetTextData(self):
-        self._nowQuestionCountText.changeTextConfigure("문제 %d번" % self._count)
+        self._nowQuestionCountText.setTextConfigure("문제 %d번" % self._count)
 
         self._firstQuestionText.setVisible(False)
         self._firstQuestionMoreText.setVisible(False)
@@ -82,7 +82,7 @@ class SceneGame(SceneBase):
         self._secondAnswerButton = self.createImageButton(400, 300, "circleButton.png", "", 30, self.selectQuestion, 1)
 
     def showFirstQuestion(self):
-        self._firstQuestionText.changeTextConfigure(self._value[0])
+        self._firstQuestionText.setTextConfigure(self._value[0])
         self._firstQuestionText.setVisible(True)
 
         self.registerTimer(self.GAME_QUESTION_TIME_JOB, 0.25, self.showFirstQuestionMore)
@@ -92,7 +92,7 @@ class SceneGame(SceneBase):
         self.registerTimer(self.GAME_QUESTION_TIME_JOB, 0.25, self.showSecondQuestion)
 
     def showSecondQuestion(self):
-        self._secondQuestionText.changeTextConfigure(self._value[1])
+        self._secondQuestionText.setTextConfigure(self._value[1])
         self._secondQuestionText.setVisible(True)
 
         self.registerTimer(self.GAME_QUESTION_TIME_JOB, 0.25, self.showSecondQuestionMore)
@@ -101,8 +101,8 @@ class SceneGame(SceneBase):
         self.makeRandomSelection()
 
         self._secondQuestionMoreText.setVisible(True)
-        self._firstAnswerButton.changeTextConfigure(self._selection[0])
-        self._secondAnswerButton.changeTextConfigure(self._selection[1])
+        self._firstAnswerButton.setTextConfigure(self._selection[0])
+        self._secondAnswerButton.setTextConfigure(self._selection[1])
 
         self._canSelect = True
         # 두번째 보기가 완전히 나오면 게임 오버 타이머도 등록
@@ -146,7 +146,7 @@ class SceneGame(SceneBase):
         self._count += 1
 
         # text 갱신
-        self._scoreText.changeTextConfigure("뇌가 9가 된 정도 : %d" % self._score)
+        self._scoreText.setTextConfigure("뇌가 9가 된 정도 : %d" % self._score)
 
         # 정답을 맞추면 게임 오버 타이머 제거
         self.unRegisterTimer(self.GAME_OVER_TIME_JOB)
