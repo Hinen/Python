@@ -79,7 +79,9 @@ class SceneBase():
         imgLabel = Label(self.win, image=img)
         imgLabel.image = img
 
-        self.canvas.create_window(posX, posY, anchor=CENTER, window=imgLabel)
+        imgLabel.place(x=posX, y=posY, anchor=CENTER)
+        # self.canvas.create_window(posX, posY, anchor=CENTER, window=imgLabel)
+
         return imgLabel
 
     def createText(self, posX, posY, text, size, *args):
@@ -92,7 +94,9 @@ class SceneBase():
                 anchor = args[1]
 
         t = Label(self.win, text=text, font=(FONT, size), fg=textColor, bg="white", anchor=anchor)
-        self.canvas.create_window(posX, posY, window=t, anchor=anchor)
+        t.place(x=posX, y=posY, anchor=anchor)
+        # self.canvas.create_window(posX, posY, window=t, anchor=anchor)
+
         return t
     
     def createButton(self, posX, posY, width, height, text, textSize, callback, *param):
@@ -101,7 +105,9 @@ class SceneBase():
         else:
             button = Button(self.win, width=width, height=height, text=text, font=(FONT, textSize), command=callback, anchor=CENTER)
 
-        self.canvas.create_window(posX, posY, anchor=CENTER, window=button)
+        button.place(x=posX, y=posY, anchor=CENTER)
+        # self.canvas.create_window(posX, posY, anchor=CENTER, window=button)
+
         return button
 
     def createImageButton(self, posX, posY, name, text, textSize, callback, *param):
@@ -112,7 +118,9 @@ class SceneBase():
             button = Button(self.win, text=text, font=(FONT, textSize), image=img, compound=CENTER, command=callback, bg="white", borderwidth=0, padx=0, pady=0)
 
         button.image = img
-        self.canvas.create_window(posX, posY, anchor=CENTER, window=button)
+        button.place(x=posX, y=posY, anchor=CENTER)
+        # self.canvas.create_window(posX, posY, anchor=CENTER, window=button)\
+
         return button
 
     def clearScene(self):
