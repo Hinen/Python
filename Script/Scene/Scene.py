@@ -85,7 +85,7 @@ class SceneBase():
 
     def createImageLabel(self, posX, posY, name):
         img = PhotoImage(file='Resources/Assets/' + name)
-        imgLabel = Label(self.win, image=img, bd=0)
+        imgLabel = Label(self.win, image=img, bd=0, bg='white')
         imgLabel.image = img
 
         imgLabel.place(x=posX, y=posY, anchor=CENTER)

@@ -9,6 +9,8 @@ class SceneCreatePlayer(SceneBase):
         super().__init__(type, win, sceneManager)
 
         self.createImageLabel(400, 300, "whiteBG.png")
+        self.createImageLabel(130, 450, "createPlayerChar.png")
+
         self.createText(400, 100, "당신의 이름은?", 40)
 
         self.entry = self.createEntry(400, 300, 10, 5, 20, self.naming)

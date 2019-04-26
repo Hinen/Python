@@ -7,6 +7,8 @@ class SceneDesc(SceneBase):
         super().__init__(type, win, sceneManager)
 
         self.createImageLabel(400, 300, "whiteBG.png")
+        self.createImageLabel(110, 530, "descChar.png")
+
         self.createText(400, 100, "설명", 40)
 
         self.createText(400, 200, "덧셈 문제와 보기 2개가 나오면", 20)
