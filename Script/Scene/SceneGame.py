@@ -205,7 +205,7 @@ class SceneGame(SceneBase):
 
     def timeOver(self):
         self._canSelect = False
-        SoundManager.get().playFX("gameEnd.wav")
+        SoundManager.get().playFX("boom.wav")
         self.changeCharImager("timeOver.png")
 
         self.registerTimer(self.GAME_END_SCENE_CHANGE_TIME_JOB, 2, self.goEnd)
