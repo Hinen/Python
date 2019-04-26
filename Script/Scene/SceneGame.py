@@ -11,8 +11,11 @@ class SceneGame(SceneBase):
 
     _score = 0
     _count = 1
+
     _level = 1
-    _tempo = 0.25
+    _tempo = 0.35
+    _nextTime = 1.0
+    _leftTime = 5.0
 
     _value = [0, 0]
     _selection = [0, 0]
@@ -39,7 +42,7 @@ class SceneGame(SceneBase):
         self.createQuestionButton()
 
         # game start!
-        self.registerTimer(self.GAME_BINGO_TIME_JOB, 1, self.reset)
+        self.registerTimer(self.GAME_BINGO_TIME_JOB, 0.5, self.reset)
 
     def createTextData(self):
         self._nowQuestionCountText = self.createText(30, 60, "문제 %d번" % self._count, 40, "black", W)
@@ -109,11 +112,7 @@ class SceneGame(SceneBase):
         self._canSelect = True
 
         # 두번째 보기가 완전히 나오면 게임 오버 타이머도 등록
-        leftTime = 5 - (self._level - 1)
-        if leftTime < 1:
-            leftTime = 1
-
-        self.registerTimer(self.GAME_OVER_TIME_JOB, leftTime, self.timeOver)
+        self.registerTimer(self.GAME_OVER_TIME_JOB, self._leftTime, self.timeOver)
 
     def makeRandomSelection(self):
         sum = self._value[0] + self._value[1]
@@ -161,20 +160,28 @@ class SceneGame(SceneBase):
         self.unRegisterTimer(self.GAME_OVER_TIME_JOB)
 
         # 바로 다음 문제 타이머 등록
-        nextTime = 1 - (self._level - 0.15)
-        if nextTime < 0.1:
-            nextTime = 0.1
-
-        self.registerTimer(self.GAME_BINGO_TIME_JOB, nextTime, self.reset)
+        self.registerTimer(self.GAME_BINGO_TIME_JOB, self._nextTime, self.reset)
 
     def levelUp(self):
-       if self._score % 10 == 0:
+       if self._score % 5 == 0:
             self._level += 1
+
+            # tempo balance
             if self._tempo > 0:
                 self._tempo -= 0.05
 
             if self._tempo < 0:
                 self._tempo = 0
+
+            # next time balance
+            self._nextTime -= 0.25
+            if self._nextTime < 0.1:
+                self._nextTime = 0.1
+
+            # left time balance
+            self._leftTime -= 0.5
+            if self._leftTime < 1.5:
+                 self._leftTime = 1.5
 
     def wrong(self):
         # 걸려있던 게임 오버 타이머는 제거
