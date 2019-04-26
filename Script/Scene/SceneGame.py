@@ -32,12 +32,15 @@ class SceneGame(SceneBase):
     _secondAnswerButton = None
     _whatIsYourSelectionText = None
 
+    _charImage = None
     _scoreText = None
 
     def __init__(self, type, win, sceneManager):
         super().__init__(type, win, sceneManager)
 
         self.createImageLabel(400, 300, "whiteBG.png")
+        self._charImage = self.createImageLabel(630, 400, "normal.png")
+
         self.createTextData()
         self.createQuestionButton()
 
@@ -67,6 +70,7 @@ class SceneGame(SceneBase):
         self.resetTextData()
         self.resetQuestion()
         self.showFirstQuestion()
+        self.changeCharImager("normal.png")
 
     def resetTextData(self):
         self._nowQuestionCountText.setTextConfigure("문제 %d번" % self._count)
@@ -81,6 +85,11 @@ class SceneGame(SceneBase):
     def resetQuestion(self):
         self._value[0] = random.randint(1, 8)
         self._value[1] = random.randint(1, 9 - self._value[0])
+
+    def changeCharImager(self, name):
+        img = self.createImage(name)
+        self._charImage.object.configure(image=img)
+        self._charImage.object.image = img
 
     def createQuestionButton(self):
         self._firstAnswerButton = self.createImageButton(200, 300, "circleButton.png", "", 30, self.selectQuestion, 0)
@@ -146,6 +155,7 @@ class SceneGame(SceneBase):
     def bingo(self):
         self._canSelect = False
         SoundManager.get().playFX("bingo.wav")
+        self.changeCharImager("bingo.png")
 
         # 현재 레벨 만큼 스코어 상승
         self._score += self._level
@@ -189,12 +199,15 @@ class SceneGame(SceneBase):
 
         self._canSelect = False
         SoundManager.get().playFX("wrong.wav")
+        self.changeCharImager("wrong.png")
 
         self.registerTimer(self.GAME_END_SCENE_CHANGE_TIME_JOB, 2, self.goEnd)
 
     def timeOver(self):
         self._canSelect = False
         SoundManager.get().playFX("gameEnd.wav")
+        self.changeCharImager("timeOver.png")
+
         self.registerTimer(self.GAME_END_SCENE_CHANGE_TIME_JOB, 2, self.goEnd)
 
     def goEnd(self):
