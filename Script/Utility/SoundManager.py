@@ -11,6 +11,12 @@ class SoundManager(SingleTon):
         pygame.mixer.music.load('Resources/Sound/BGM/' + name)
         pygame.mixer.music.play(loop)
 
+    def stopBGM(self):
+        pygame.mixer.music.stop()
+
+    def isPlayingBGM(self):
+        return pygame.mixer.music.get_busy()
+
     def playFX(self, name):
         # 효과음 캐싱
         if name in self.fxDic:
@@ -19,3 +25,5 @@ class SoundManager(SingleTon):
             sound = pygame.mixer.Sound('Resources/Sound/FX/' + name)
             sound.play()
             self.fxDic[name] = sound
+
+        return self.fxDic[name]

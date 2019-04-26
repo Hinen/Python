@@ -27,6 +27,7 @@ class SceneBase():
     win = None
     canvas = None
     sceneManager = None
+    objects = []
 
     timer = {}
 
@@ -35,7 +36,15 @@ class SceneBase():
         self.win = win
         self.canvas = canvas
         self.sceneManager = sceneManager
-        self.clearScene()
+        self.objects = []
+
+    def destroy(self):
+        for obj in self.objects:
+            obj.object.destroy()
+            obj.object = None
+
+        self.objects = []
+        #self.canvas.delete("all")
 
     def update(self, dt):
         self._updateTimer(dt)
@@ -84,6 +93,7 @@ class SceneBase():
         obj = GameObject(imgLabel, posX, posY, CENTER)
         # self.canvas.create_window(posX, posY, anchor=CENTER, window=imgLabel)
 
+        self.objects.append(obj)
         return obj
 
     def createText(self, posX, posY, text, size, *args):
@@ -99,6 +109,7 @@ class SceneBase():
         obj = GameObject(t, posX, posY, anchor)
         # self.canvas.create_window(posX, posY, window=t, anchor=anchor)
 
+        self.objects.append(obj)
         return obj
     
     def createButton(self, posX, posY, width, height, text, textSize, callback, *param):
@@ -110,6 +121,7 @@ class SceneBase():
         obj = GameObject(button, posX, posY, CENTER)
         # self.canvas.create_window(posX, posY, anchor=CENTER, window=button)
 
+        self.objects.append(obj)
         return obj
 
     def createImageButton(self, posX, posY, name, text, textSize, callback, *param):
@@ -123,7 +135,5 @@ class SceneBase():
         obj = GameObject(button, posX, posY, CENTER)
         # self.canvas.create_window(posX, posY, anchor=CENTER, window=button)\
 
+        self.objects.append(obj)
         return obj
-
-    def clearScene(self):
-        self.canvas.delete("all")

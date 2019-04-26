@@ -183,12 +183,12 @@ class SceneGame(SceneBase):
         self._canSelect = False
         SoundManager.get().playFX("wrong.wav")
 
-        self.registerTimer(self.GAME_END_SCENE_CHANGE_TIME_JOB, 3, self.goEnd)
+        self.registerTimer(self.GAME_END_SCENE_CHANGE_TIME_JOB, 2, self.goEnd)
 
     def timeOver(self):
         self._canSelect = False
         SoundManager.get().playFX("gameEnd.wav")
-        self.registerTimer(self.GAME_END_SCENE_CHANGE_TIME_JOB, 3, self.goEnd)
+        self.registerTimer(self.GAME_END_SCENE_CHANGE_TIME_JOB, 2, self.goEnd)
 
     def goEnd(self):
         self.sceneManager.sceneChange(SceneType.END)

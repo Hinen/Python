@@ -13,6 +13,9 @@ class SceneMenu(SceneBase):
         self.createButton(400, 400, 15, 2, "게임 설명", 20, self.gameDesc)
         self.createButton(400, 500, 15, 2, "게임 종료", 20, self.gameQuit)
 
+        if not SoundManager.get().isPlayingBGM():
+            SoundManager.get().playBGM('taebo.wav', -1)
+
     def gameStart(self):
         SoundManager.get().playFX("select.wav")
         self.sceneManager.sceneChange(SceneType.GAME)

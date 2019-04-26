@@ -41,6 +41,9 @@ class GameManager():
         self.gameLoop()
 
     def sceneChange(self, newScene):
+        if self._nowScene is not None:
+            self._nowScene.destroy()
+
         self._nowScene = newScene
 
     def pressKeyHandler(self, key):
