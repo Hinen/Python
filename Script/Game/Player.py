@@ -7,6 +7,9 @@ class Player(SingleTon):
     def __init__(self, name):
         self._name = name
 
+    def getName(self):
+        return self._name
+
     def getScore(self):
         return self._score
 

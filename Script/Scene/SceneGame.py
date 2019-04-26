@@ -198,4 +198,5 @@ class SceneGame(SceneBase):
         self.registerTimer(self.GAME_END_SCENE_CHANGE_TIME_JOB, 2, self.goEnd)
 
     def goEnd(self):
+        Player.get().setScore(self._score)
         self.sceneManager.sceneChange(SceneType.END)
