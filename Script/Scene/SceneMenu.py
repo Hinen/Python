@@ -6,7 +6,7 @@ class SceneMenu(SceneBase):
     def __init__(self, type, win, sceneManager):
         super().__init__(type, win, sceneManager)
 
-        self.createImage(400, 300, "whiteBG.png")
+        self.createImageLabel(400, 300, "whiteBG.png")
         self.createText(400, 100, "메뉴", 40)
 
         self.createButton(400, 300, 15, 2, "게임 시작", 20, self.gameStart)

@@ -83,9 +83,9 @@ class SceneBase():
     def pressKeyHandler(self, key):
         pass
 
-    def createImage(self, posX, posY, name):
+    def createImageLabel(self, posX, posY, name):
         img = PhotoImage(file='Resources/Assets/' + name)
-        imgLabel = Label(self.win, image=img)
+        imgLabel = Label(self.win, image=img, bd=0)
         imgLabel.image = img
 
         imgLabel.place(x=posX, y=posY, anchor=CENTER)

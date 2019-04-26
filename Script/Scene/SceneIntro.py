@@ -9,7 +9,8 @@ class SceneIntro(SceneBase):
     def __init__(self, type, win, sceneManager):
         super().__init__(type, win, sceneManager)
 
-        self.createImage(400, 300, "whiteBG.png")
+        self.createImageLabel(400, 300, "whiteBG.png")
+        self.createImageLabel(400, 300, "welcomeChar.gif")
         self.createText(400, 100, "뇌를 9로 바꾸는 변환기", 40)
 
         self.registerTimer(self.getNotUseTimeJob(), 2, self.createPressAnyKeyText)
