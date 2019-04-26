@@ -59,7 +59,7 @@ class GameManager():
         self._nowScene.update(updateDt)
 
         # loop
-        self._win.after(100, self.gameLoop)
+        self._win.after(10, self.gameLoop)
 
 _win = Tk()
 _gameManager = GameManager(_win)

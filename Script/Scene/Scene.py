@@ -11,6 +11,7 @@ class SceneType(enum.Enum):
     MENU = 2
     DESC = 3
     GAME = 4
+    END = 5
 
 class Timer():
     time = 0

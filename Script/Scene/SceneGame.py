@@ -7,10 +7,12 @@ class SceneGame(SceneBase):
     GAME_QUESTION_TIME_JOB = "GAME_QUESTION_TIME_JOB"
     GAME_BINGO_TIME_JOB = "GAME_BINGO_TIME_JOB"
     GAME_OVER_TIME_JOB = "GAME_OVER_TIME_JOB"
+    GAME_END_SCENE_CHANGE_TIME_JOB = "GAME_END_SCENE_CHANGE_TIME_JOB"
 
     _score = 0
     _count = 1
     _level = 1
+    _tempo = 0.25
 
     _value = [0, 0]
     _selection = [0, 0]
@@ -85,17 +87,17 @@ class SceneGame(SceneBase):
         self._firstQuestionText.setTextConfigure(self._value[0])
         self._firstQuestionText.setVisible(True)
 
-        self.registerTimer(self.GAME_QUESTION_TIME_JOB, 0.25, self.showFirstQuestionMore)
+        self.registerTimer(self.GAME_QUESTION_TIME_JOB, self._tempo, self.showFirstQuestionMore)
 
     def showFirstQuestionMore(self):
         self._firstQuestionMoreText.setVisible(True)
-        self.registerTimer(self.GAME_QUESTION_TIME_JOB, 0.25, self.showSecondQuestion)
+        self.registerTimer(self.GAME_QUESTION_TIME_JOB, self._tempo, self.showSecondQuestion)
 
     def showSecondQuestion(self):
         self._secondQuestionText.setTextConfigure(self._value[1])
         self._secondQuestionText.setVisible(True)
 
-        self.registerTimer(self.GAME_QUESTION_TIME_JOB, 0.25, self.showSecondQuestionMore)
+        self.registerTimer(self.GAME_QUESTION_TIME_JOB, self._tempo, self.showSecondQuestionMore)
 
     def showSecondQuestionMore(self):
         self.makeRandomSelection()
@@ -105,8 +107,13 @@ class SceneGame(SceneBase):
         self._secondAnswerButton.setTextConfigure(self._selection[1])
 
         self._canSelect = True
+
         # 두번째 보기가 완전히 나오면 게임 오버 타이머도 등록
-        self.registerTimer(self.GAME_OVER_TIME_JOB, 10, self.gameOver)
+        leftTime = 5 - (self._level - 1)
+        if leftTime < 1:
+            leftTime = 1
+
+        self.registerTimer(self.GAME_OVER_TIME_JOB, leftTime, self.timeOver)
 
     def makeRandomSelection(self):
         sum = self._value[0] + self._value[1]
@@ -130,10 +137,10 @@ class SceneGame(SceneBase):
             if sum == 9:
                 self.bingo()
             else:
-                self.gameOver()
+                self.wrong()
         else:
             if sum == 9:
-                self.gameOver()
+                self.wrong()
             else:
                 self.bingo()
 
@@ -145,6 +152,8 @@ class SceneGame(SceneBase):
         self._score += self._level
         self._count += 1
 
+        self.levelUp()
+
         # text 갱신
         self._scoreText.setTextConfigure("뇌가 9가 된 정도 : %d" % self._score)
 
@@ -152,10 +161,34 @@ class SceneGame(SceneBase):
         self.unRegisterTimer(self.GAME_OVER_TIME_JOB)
 
         # 바로 다음 문제 타이머 등록
-        self.registerTimer(self.GAME_BINGO_TIME_JOB, 1, self.reset)
+        nextTime = 1 - (self._level - 0.15)
+        if nextTime < 0.1:
+            nextTime = 0.1
 
-    def gameOver(self):
+        self.registerTimer(self.GAME_BINGO_TIME_JOB, nextTime, self.reset)
+
+    def levelUp(self):
+       if self._score % 10 == 0:
+            self._level += 1
+            if self._tempo > 0:
+                self._tempo -= 0.05
+
+            if self._tempo < 0:
+                self._tempo = 0
+
+    def wrong(self):
+        # 걸려있던 게임 오버 타이머는 제거
+        self.unRegisterTimer(self.GAME_OVER_TIME_JOB)
+
         self._canSelect = False
         SoundManager.get().playFX("wrong.wav")
 
-        #self.win.quit()
+        self.registerTimer(self.GAME_END_SCENE_CHANGE_TIME_JOB, 3, self.goEnd)
+
+    def timeOver(self):
+        self._canSelect = False
+        SoundManager.get().playFX("gameEnd.wav")
+        self.registerTimer(self.GAME_END_SCENE_CHANGE_TIME_JOB, 3, self.goEnd)
+
+    def goEnd(self):
+        self.sceneManager.sceneChange(SceneType.END)
