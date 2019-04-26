@@ -142,4 +142,6 @@ class SceneBase():
         entry.bind("<Return>", callback)
 
         obj = GameObject(entry, posX, posY, CENTER)
+
+        self.objects.append(obj)
         return obj
