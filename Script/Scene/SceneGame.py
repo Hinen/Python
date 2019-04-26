@@ -15,7 +15,7 @@ class SceneGame(SceneBase):
     _level = 1
     _tempo = 0.35
     _nextTime = 1.0
-    _leftTime = 5.0
+    _leftTime = 4.0
 
     _value = [0, 0]
     _selection = [0, 0]
@@ -190,8 +190,8 @@ class SceneGame(SceneBase):
 
             # left time balance
             self._leftTime -= 0.5
-            if self._leftTime < 1.5:
-                 self._leftTime = 1.5
+            if self._leftTime < 1.0:
+                 self._leftTime = 1.0
 
     def wrong(self):
         # 걸려있던 게임 오버 타이머는 제거
