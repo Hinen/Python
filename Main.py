@@ -4,17 +4,18 @@ from tkinter import *
 from datetime import *
 import os
 
-def importPyGame():
+def importPyGame(errCount):
     try:
-        import pygame
+        if errCount < 2:
+            import pygame
     except ImportError:
         print("Installing PyGame")
         os.system('pip install pygame')
-        importPyGame()
+        importPyGame(errCount + 1)
 
-importPyGame()
+importPyGame(0)
+
 from Script.Utility.SceneManager import *
-from Script.Utility.SoundManager import *
 
 class GameManager():
     _win = None

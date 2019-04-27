@@ -1,31 +1,46 @@
 # -*- coding: utf-8 -*-
 
-import pygame
+import sys
 from Script.Core.SingleTon import *
+
+def isPygameImported():
+    return 'pygame' in sys.modules
+
+if isPygameImported():
+    import pygame
 
 class SoundManager(SingleTon):
     fxDic = {}
 
     def __init__(self):
-        pygame.mixer.init()
+        if isPygameImported():
+            pygame.mixer.init()
 
     def playBGM(self, name, loop):
-        pygame.mixer.music.load('Resources/Sound/BGM/' + name)
-        pygame.mixer.music.play(loop)
+        if isPygameImported():
+            pygame.mixer.music.load('Resources/Sound/BGM/' + name)
+            pygame.mixer.music.play(loop)
 
     def stopBGM(self):
-        pygame.mixer.music.stop()
+        if isPygameImported():
+            pygame.mixer.music.stop()
 
     def isPlayingBGM(self):
-        return pygame.mixer.music.get_busy()
+        if isPygameImported():
+            return pygame.mixer.music.get_busy()
+        else:
+            return False
 
     def playFX(self, name):
-        # 효과음 캐싱
-        if name in self.fxDic:
-            self.fxDic[name].play()
-        else:
-            sound = pygame.mixer.Sound('Resources/Sound/FX/' + name)
-            sound.play()
-            self.fxDic[name] = sound
+        if isPygameImported():
+            # 효과음 캐싱
+            if name in self.fxDic:
+                self.fxDic[name].play()
+            else:
+                sound = pygame.mixer.Sound('Resources/Sound/FX/' + name)
+                sound.play()
+                self.fxDic[name] = sound
 
-        return self.fxDic[name]
+            return self.fxDic[name]
+        else:
+            return None

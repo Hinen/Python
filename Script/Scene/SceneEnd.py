@@ -37,6 +37,8 @@ class SceneEnd(SceneBase):
         self.createButton(650, 550, 15, 2, "메뉴로 이동", 20, self.goMenu)
 
     def goMenu(self):
-        self.sound.stop()
+        if self.sound is not None:
+            self.sound.stop()
+
         SoundManager.get().playFX("select.wav")
         self.sceneManager.sceneChange(SceneType.MENU)
