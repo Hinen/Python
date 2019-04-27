@@ -4,10 +4,13 @@ import sys
 from Script.Core.SingleTon import *
 
 def isPygameImported():
+    return False
     return 'pygame' in sys.modules
 
 if isPygameImported():
     import pygame
+else:
+    import winsound
 
 class SoundManager(SingleTon):
     fxDic = {}
@@ -20,6 +23,8 @@ class SoundManager(SingleTon):
         if isPygameImported():
             pygame.mixer.music.load('Resources/Sound/BGM/' + name)
             pygame.mixer.music.play(loop)
+        else:
+            winsound.PlaySound('Resources/Sound/BGM/' + name, winsound.SND_LOOP + winsound.SND_ASYNC)
 
     def stopBGM(self):
         if isPygameImported():

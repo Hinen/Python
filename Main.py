@@ -10,7 +10,7 @@ def importPyGame(errCount):
             import pygame
     except ImportError:
         print("Installing PyGame")
-        os.system('pip3 install pygame')
+        os.system('pip install pygame')
         importPyGame(errCount + 1)
 
 importPyGame(0)
