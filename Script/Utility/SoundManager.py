@@ -4,7 +4,6 @@ import sys
 from Script.Core.SingleTon import *
 
 def isPygameImported():
-    return False
     return 'pygame' in sys.modules
 
 if isPygameImported():
